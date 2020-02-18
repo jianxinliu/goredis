@@ -3,11 +3,12 @@ package rpcserver
 import (
 	"errors"
 	"fmt"
-	"github.com/jianxin/goredis/core"
 	"log"
 	"net"
 	"net/rpc"
 	// "strings"
+
+	"github.com/jianxin/goredis/core"
 )
 
 type CmderService struct{}
