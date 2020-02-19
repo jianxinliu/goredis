@@ -32,6 +32,9 @@ func main() {
 	fmt.Print(host + "> ")
 	for scanner.Scan() {
 		cmd := scanner.Text()
+		if cmd == "exit" {
+			os.Exit(0)
+		}
 		cmdType := firstWord(cmd)
 		if rpcServices[cmdType] == true {
 			rep, err := dialRPC(cmdType, cmd)

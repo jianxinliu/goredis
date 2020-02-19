@@ -25,6 +25,7 @@ go run ./goredis/app.go
 ```sh
 go run ./goredis/client/client.go
 ```
+exit 退出客户端
 
 ## 支持的命令
 
