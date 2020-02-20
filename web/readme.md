@@ -1,1 +1,1 @@
-goredis-web goRedis 的 Web 端接口
+goredis-web goredis 的 Web 端接口 & 前端展示页面

@@ -17,13 +17,26 @@ web 端访问
 ### 1. 运行 goredis 服务器
 
 ```sh
-go run ./goredis/app.go
+> go run ./goredis/app.go
+2020/02/20 12:57:06 goredis is starting
+2020/02/20 12:57:06 goredis server listening on 127.0.0.1:8064 ....
 ```
 
 ### 2. 运行客户端
 
 ```sh
-go run ./goredis/client/client.go
+> go run ./goredis/client/client.go
+127.0.0.1:8064> keys
+(error) ERR wrong number of arguments
+127.0.0.1:8064> get name
+nil
+127.0.0.1:8064> set name golang
+OK
+127.0.0.1:8064> get name
+golang
+127.0.0.1:8064> keys *
+name
+127.0.0.1:8064>  
 ```
 exit 退出客户端
 
