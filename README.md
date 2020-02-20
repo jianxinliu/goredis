@@ -40,6 +40,13 @@ name
 ```
 exit 退出客户端
 
+### 3. Web 页面访问
+
+```sh
+> go run ./goredis/httpserver/htpServer.go
+httpserver listening on 127.0.0.1:9090 ....
+```
+
 ## 支持的命令
 
 - [x] SET
