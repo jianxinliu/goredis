@@ -43,9 +43,13 @@ exit 退出客户端
 ### 3. Web 页面访问
 
 ```sh
-> go run ./goredis/httpserver/htpServer.go
+> cd ./goredis/httpserver
+> go run ./htpServer.go
 httpserver listening on 127.0.0.1:9090 ....
 ```
+![web 界面示例](./view.jpg)
+
+<kbd>Enter</kbd> 直接发送命令，<kbd>Up</kbd> & <kbd>Down</kbd> 快速调出历史命令。
 
 ## 支持的命令
 

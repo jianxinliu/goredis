@@ -9,8 +9,36 @@
 
 <body>
     <div id="app">
-        <div class="btn btn-primary" style="margin: 3% 20%;" @click="showTableHandler">Show Users</div>
-        <div>{{ret}}</div>
+        <div class="container-fluid">
+            <div class="row" style="margin: 6% 0;">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="card" style="background: #54497a; height: 500px;">
+                        <div class="card-header">
+                            goredis Terminal
+                        </div>
+                        <div class="card-body" style="overflow:scroll;overflow-x:hidden;">
+                            <div class="card-text">
+                                <div v-for="d in terminal">
+                                    {{ d }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="input-group input-group-sm" style="width: 80%; margin: auto;">
+                                <input type="text" class="form-control" placeholder="..." v-model="cmd"
+                                    @keyup.enter="send" @keyup.up="keyUp" @keyup.down="keyDown">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                                        @click="send">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
@@ -20,20 +48,53 @@
         var app = new Vue({
             el: '#app',
             data: {
-                ret: "",
-                showTable:false
+                terminal: ["> "],
+                cmd: "",
+                history: [],
+                ptr:0,
             },
             methods: {
-                showTableHandler() {
-                    app.showTable = !app.showTable
+                send() {
+                    // 记录历史命令
+                    app.history.push(app.cmd)
+                    app.terminal.push(app.terminal.pop() + app.cmd)
+                    app.request(app.cmd)
+                    // 清空输入框
+                    app.cmd = ""
+                    // 更新最新历史命令指针
+                    app.ptr = app.history.length
+                },
+                request(cmd) {
+                    axios({
+                        method: "post",
+                        url: "/exec?cmd=" + cmd,
+                    }).then(function (resp) {
+                        app.terminal.push(resp.data)
+                        app.terminal.push("> ")
+                    })
+                },
+                keyUp() {
+                    app.cmdHistoryMove(-1)
+                },
+                keyDown() {
+                    app.cmdHistoryMove(1)
+                },
+                // direction 
+                cmdHistoryMove(direction){
+                    if (direction > 0) {
+                        app.ptr = ++app.ptr
+                        if (app.ptr >= app.history.length) {
+                            app.ptr = app.history.length - 1
+                        }
+                    } else {
+                        app.ptr = --app.ptr
+                        if (app.ptr < 0) {
+                            app.ptr = 0
+                        }
+                    }
+                    app.cmd = app.history[app.ptr]
                 }
             }
-        })
-        axios({
-            method: "post",
-            url: "/exec?cmd=set name jianxin",
-        }).then(function (resp) {
-            app.ret = resp.data
         })
     </script>
 </body>

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
+	// "os"
 
 	client "github.com/jianxin/goredis/client/rpcClient"
 	// rpcServer "github.com/jianxin/goredis/rpcserver"
@@ -34,7 +34,7 @@ func exec(w http.ResponseWriter, r *http.Request) {
 	cmd := r.Form["cmd"][0]
 	if cmd == "exit" {
 		fmt.Fprintf(w, "Bye!")
-		os.Exit(0)
+		return
 	}
 	// fmt.Println(cmd)
 	cmdType := client.FirstWord(cmd)
