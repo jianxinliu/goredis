@@ -12,6 +12,7 @@
 ## todo
 
 - [x] web 端访问
+- [ ] 增加数据结构支持
 - [ ] 支持编程语言客户端连接
 
 ## How to
@@ -46,7 +47,7 @@ exit 退出客户端
 
 ```sh
 > cd ./goredis/httpserver
-> go run ./htpServer.go
+> go run ./httpServer.go
 httpserver listening on 127.0.0.1:9090 ....
 ```
 ![web 界面示例](./view.jpg)
