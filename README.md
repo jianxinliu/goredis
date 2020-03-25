@@ -56,8 +56,9 @@ httpserver listening on 127.0.0.1:9090 ....
 
 <kbd>Enter</kbd> 直接发送命令，<kbd>Up</kbd> & <kbd>Down</kbd> 快速调出历史命令。
 
-## 支持的命令
+## 命令
 
 - [x] SET
 - [x] GET
 - [x] KEYS
+- [ ] SETNX & distributed lock
